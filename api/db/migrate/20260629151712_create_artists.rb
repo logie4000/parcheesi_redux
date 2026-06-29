@@ -3,7 +3,8 @@ class CreateArtists < ActiveRecord::Migration[8.1]
     create_table :artists do |t|
       t.string :name
       t.string :comment
-
+      t.string :password_digest
+      
       t.timestamps
     end
   end

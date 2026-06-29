@@ -4,7 +4,7 @@ class CreateRadioShows < ActiveRecord::Migration[8.1]
       t.date :publish_date
       t.string :title
       t.text :comment
-      t.references :dee_jay, null: false, foreign_key: true
+      t.references :dee_jay, foreign_key: true
       t.string :web_link
 
       t.timestamps
