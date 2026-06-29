@@ -6,7 +6,6 @@ RSpec.describe 'Artists API', type: :request do
 
   let!(:user) { create(:dee_jay) }
 
-  let!(:radio_show) { create(:radio_show, dee_jay_id: user.id) }
   let!(:artists) { create_list(:artist, size_artist_list) }
   let(:artist_id) { artists.first.id }
     
