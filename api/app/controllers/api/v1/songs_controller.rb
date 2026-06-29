@@ -32,7 +32,7 @@ class Api::V1::SongsController < ApplicationController
   # PATCH/PUT /songs/1
   def update
     if @song.update(song_params)
-      render json: @song
+      head :no_content
     else
       render json: @song.errors, status: :unprocessable_content
     end
