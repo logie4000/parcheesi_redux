@@ -12,7 +12,7 @@ RSpec.describe 'Radio Shows API', type: :request do
   
   let!(:songs) { create_list(:song, size_track_list, album_id: album.id, artist_id: artist.id) }
 
-  size_track_list.times do |n| {
+  SIZE_TRACK_LIST.times do |n| {
     create(:track, ordinal: n, song_id: Song.find(n).id, radio_show_id: radio_show.id)
   }
 
