@@ -177,13 +177,11 @@ class Song < ApplicationRecord
   # end
   
   def self.fix_artist_ids
-    Song.all.each do |song|
-      if (song.artist_id.nil?)
-        if (song.album)
-          Rails.logger.debug "Setting artist id = #{song.album.artist_id} for song id = #{song.id}"
-          song.artist_id = song.album.artist_id
-          song.save!
-        end
+    Song.where(artist_id: nil).each do |song|
+      if (song.album)
+        Rails.logger.debug "Setting artist id = #{song.album.artist_id} for song id = #{song.id}"
+        song.artist_id = song.album.artist_id
+        song.save!
       end
     end
   end
