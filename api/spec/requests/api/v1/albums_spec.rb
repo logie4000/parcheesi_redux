@@ -8,7 +8,7 @@ RSpec.describe 'Albums API', type: :request do
 
   let!(:radio_show) { create(:radio_show, dee_jay_id: user.id) }
   let!(:artist) { create(:artist) }
-  let!(:albums) { create_list(:album, size_album_list, artist_id: artist.id) }
+  let!(:albums) { create_list(:album, size_album_list) }
   let(:album_id) { albums.first.id }
     
   let(:headers) { valid_headers }
