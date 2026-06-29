@@ -5,8 +5,17 @@ RSpec.describe 'Radio Shows API', type: :request do
   let!(:size_track_list) { 1 }
 
   let!(:user) { create(:dee_jay) }
+  let!(:radio_show) { create(:radio_show, dee_jay_id: user.id) }
+  let!(:artist) { create(:artist) }
+  let!(:album) { create(:album) }
+  
+  let!(:songs) { create_list(:song, size_track_list, album_id: album.id, artist_id: artist.id) }
 
-  let!(:tracks) { create_list(:track, size_track_list) }
+  size_track_list.each do |n| {
+    create(:track, ordinal: n, song_id: Song.find(n).id, radio_show_id: radio_show.id)
+  }
+  
+  let!(:track) { create_list(:track, size_track_list) }
   let(:track_id) { tracks.first.id }
     
   let(:headers) { valid_headers }
