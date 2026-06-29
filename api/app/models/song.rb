@@ -69,7 +69,7 @@ class Song < ApplicationRecord
     
     # Find an existing Album with an artist id associated with it
     album = Album.find(song_params[:album_id]) if (song_params[:album_id])
-    album = Album.find_by_ci("title", song_params[:album_title]).find_by(artist_id: artist.id) unless(album)
+#    album = Album.find_by_ci("title", song_params[:album_title]).find_by(artist_id: artist.id) unless(album)
     
     # Find an existing Album that has the artist on it
     album = artist.albums.find_by_ci("albums.title", song_params[:album_title]).first unless (album)

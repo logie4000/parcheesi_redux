@@ -15,13 +15,18 @@ class Api::V1::SongsController < ApplicationController
 
   # POST /songs
   def create
-    @song = Song.new(song_params)
-
-    if @song.save
-      render json: @song, status: :created, location: @song
-    else
-      render json: @song.errors, status: :unprocessable_content
+    Rails.logger.debug("Started create call at #{Time.now.utc}")
+    begin
+      song_params
+    rescue StandardError => e
+      Rails.logger.error "Song.create > song_params raised StandardError #{e.inspect}"
+      raise ActiveRecord::RecordInvalid
     end
+
+    @song = Song.post_song(params, @current_user.id)
+    Rails.logger.debug("Returning json response at #{Time.now.utc}")
+    json_response(@song, :created)
+    Rails.logger.debug("Ended create call at #{Time.now.utc}")
   end
 
   # PATCH/PUT /songs/1

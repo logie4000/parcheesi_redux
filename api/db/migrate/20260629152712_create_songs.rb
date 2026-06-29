@@ -5,7 +5,7 @@ class CreateSongs < ActiveRecord::Migration[8.1]
       t.string :comment
       t.references :album, foreign_key: true
       t.integer :total_plays
-      t.references :artist, null: false, foreign_key: true
+      t.references :artist, foreign_key: true
       t.references :last_played_overall, foreign_key: { to_table: :radio_shows }
 
       t.timestamps
