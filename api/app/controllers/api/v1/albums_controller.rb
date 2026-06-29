@@ -1,5 +1,5 @@
 class Api::V1::AlbumsController < ApplicationController
-  before_action :set_album, only: %i[ show update destroy ]
+  before_action :set_album, only: [ :show ]
 
   # GET /albums
   def index
@@ -21,6 +21,6 @@ class Api::V1::AlbumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.expect(album: [ :title, :comment, :artist_id ])
+      params.expect(album: [ :title, :comment, :belongs_to ])
     end
 end
