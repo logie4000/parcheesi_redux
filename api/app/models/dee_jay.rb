@@ -1,0 +1,2 @@
+class DeeJay < ApplicationRecord
+end
