@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Radio Shows API', type: :request do
+RSpec.describe 'Tracks API', type: :request do
   # initialize test data
   SIZE_TRACK_LIST = 10
   let!(:size_track_list) { SIZE_TRACK_LIST }
@@ -11,12 +11,10 @@ RSpec.describe 'Radio Shows API', type: :request do
   let!(:album) { create(:album) }
   
   let!(:songs) { create_list(:song, SIZE_TRACK_LIST, album_id: album.id, artist_id: artist.id) }
+  let!(:song_1) { songs.first }
 
-  SIZE_TRACK_LIST.times do |n|
-    create(:track, ordinal: n + 1, song_id: Song.all.first.id, radio_show_id: radio_show.id)
-  end
+  let!(:tracks) { create_list(:track, SIZE_TRACK_LIST, song_id: song_1.id, radio_show_id: radio_show.id) }
 
-  let!(:track) { create_list(:track, size_track_list) }
   let(:track_id) { tracks.first.id }
     
   let(:headers) { valid_headers }
