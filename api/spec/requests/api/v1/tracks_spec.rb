@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Radio Shows API', type: :request do
   # initialize test data
-  let!(:size_track_list) { 1 }
+  SIZE_TRACK_LIST = 10
+  let!(:size_track_list) { SIZE_TRACK_LIST }
 
   let!(:user) { create(:dee_jay) }
   let!(:radio_show) { create(:radio_show, dee_jay_id: user.id) }
