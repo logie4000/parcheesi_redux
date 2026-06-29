@@ -11,7 +11,9 @@ end
 group :test do
   # Use sqlite3 as the database in a test environment
   gem "sqlite3", ">= 2.1"
+end
 
+group :developmet, :test do
   # Use RSpec for testing
   gem "rspec-rails"
   gem 'shoulda-matchers', '~> 6.0.0'
