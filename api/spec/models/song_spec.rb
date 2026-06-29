@@ -39,9 +39,10 @@ RSpec.describe Song, type: :model do
       (1..@max_plays).each do |p|
         artist = Artist.create!( {name: Faker::Lorem.words(number: 2).join(" ")} )
         album = Album.create!( {title:  Faker::Lorem.words(number: 3).join(" ")} )
-   
+
         song = artist.songs.create!( {title: Faker::Lorem.words(number: 5).join(" ")} )
-        
+        album.songs << song
+
         (1..p).each do |idx|
           radio_show = RadioShow.find(idx)
           radio_show.add_song(song)
@@ -72,10 +73,9 @@ RSpec.describe Song, type: :model do
         
         @artist = Artist.create!( {name: Faker::Lorem.words(number: 3).join(" ")} )
         @album = Album.create!( {title: Faker::Lorem.words(number: 5).join(" ")} )
-        @artist.albums << @album
 
-        @song = @artist.songs.create!( { title: Faker::Lorem.words(number: 3).join(" ")} )
-        @song2 = @artist.songs.create!( { title: Faker::Lorem.words(number: 3).join(" ")} )
+        @song = @artist.songs.create!( { title: Faker::Lorem.words(number: 3).join(" "), album_id: @album.id })
+        @song2 = @artist.songs.create!( { title: Faker::Lorem.words(number: 3).join(" "), album_id: @album.id } )
   
         @first_show.add_song(@song)
         @last_show.add_song(@song)
