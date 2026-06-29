@@ -5,37 +5,12 @@ class Api::V1::AlbumsController < ApplicationController
   def index
     @albums = Album.all
 
-    render json: @albums
+    json_response(@albums)
   end
 
   # GET /albums/1
   def show
-    render json: @album
-  end
-
-  # POST /albums
-  def create
-    @album = Album.new(album_params)
-
-    if @album.save
-      render json: @album, status: :created, location: @album
-    else
-      render json: @album.errors, status: :unprocessable_content
-    end
-  end
-
-  # PATCH/PUT /albums/1
-  def update
-    if @album.update(album_params)
-      render json: @album
-    else
-      render json: @album.errors, status: :unprocessable_content
-    end
-  end
-
-  # DELETE /albums/1
-  def destroy
-    @album.destroy!
+    json_response(@album)
   end
 
   private

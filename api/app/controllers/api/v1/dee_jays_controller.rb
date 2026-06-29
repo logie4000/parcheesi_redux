@@ -5,37 +5,12 @@ class Api::V1::DeeJaysController < ApplicationController
   def index
     @dee_jays = DeeJay.all
 
-    render json: @dee_jays
+    json_response(@dee_jays)
   end
 
   # GET /dee_jays/1
   def show
-    render json: @dee_jay
-  end
-
-  # POST /dee_jays
-  def create
-    @dee_jay = DeeJay.new(dee_jay_params)
-
-    if @dee_jay.save
-      render json: @dee_jay, status: :created, location: @dee_jay
-    else
-      render json: @dee_jay.errors, status: :unprocessable_content
-    end
-  end
-
-  # PATCH/PUT /dee_jays/1
-  def update
-    if @dee_jay.update(dee_jay_params)
-      render json: @dee_jay
-    else
-      render json: @dee_jay.errors, status: :unprocessable_content
-    end
-  end
-
-  # DELETE /dee_jays/1
-  def destroy
-    @dee_jay.destroy!
+    json_response(@dee_jay)
   end
 
   private

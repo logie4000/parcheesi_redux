@@ -5,37 +5,12 @@ class Api::V1::RadioShowsController < ApplicationController
   def index
     @radio_shows = RadioShow.all
 
-    render json: @radio_shows
+    json_response(@radio_shows)
   end
 
   # GET /radio_shows/1
   def show
-    render json: @radio_show
-  end
-
-  # POST /radio_shows
-  def create
-    @radio_show = RadioShow.new(radio_show_params)
-
-    if @radio_show.save
-      render json: @radio_show, status: :created, location: @radio_show
-    else
-      render json: @radio_show.errors, status: :unprocessable_content
-    end
-  end
-
-  # PATCH/PUT /radio_shows/1
-  def update
-    if @radio_show.update(radio_show_params)
-      render json: @radio_show
-    else
-      render json: @radio_show.errors, status: :unprocessable_content
-    end
-  end
-
-  # DELETE /radio_shows/1
-  def destroy
-    @radio_show.destroy!
+    json_response(@radio_show)
   end
 
   private
