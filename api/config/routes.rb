@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :dee_jays, :only => [:index, :show ] #, :create, :update ]
       resources :albums, :only => [:index, :show ] #, :create, :update ]
       resources :artists, :only => [:index, :show ] #, :create, :update ]
+      resources :tracks, :only => [:index, :show ] #, :create, :update ]
     end
   end
 

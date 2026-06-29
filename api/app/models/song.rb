@@ -196,7 +196,7 @@ class Song < ApplicationRecord
       
   #     song.calculate_last_played
   #   end
-  end
+  # end
   
 private
   def self.required_params?(params = {})
