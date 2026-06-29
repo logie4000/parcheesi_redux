@@ -13,6 +13,18 @@ class Api::V1::ArtistsController < ApplicationController
     json_response(@artist)
   end
 
+  def create
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist

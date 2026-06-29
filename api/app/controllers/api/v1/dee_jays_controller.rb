@@ -13,6 +13,18 @@ class Api::V1::DeeJaysController < ApplicationController
     json_response(@dee_jay)
   end
 
+  def create
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dee_jay
