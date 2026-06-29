@@ -125,28 +125,28 @@ class Song < ApplicationRecord
   def plays(dee_jay = nil)
     calculate_last_played if (self.total_plays.nil?)
     
-    return self.total_plays unless (dee_jay)
+    return self.total_plays # unless (dee_jay)
     
-    list = Hash.new
-    dee_jay_plays = 0
+    # list = Hash.new
+    # dee_jay_plays = 0
     
-    if (self.plays_by_dj)
-      list = JSON.parse(self.plays_by_dj).with_indifferent_access
-    end
+    # if (self.plays_by_dj)
+    #   list = JSON.parse(self.plays_by_dj).with_indifferent_access
+    # end
     
-    if (list[dee_jay.id.to_s].nil?)
-      dee_jay.radio_shows.each do |radio_show|
-        dee_jay_plays += Track.all.where( "radio_show_id = :radio_show_id AND song_id = :song_id", {radio_show_id: radio_show.id, song_id: self.id} ).size
-      end
+    # if (list[dee_jay.id.to_s].nil?)
+    #   dee_jay.radio_shows.each do |radio_show|
+    #     dee_jay_plays += Track.all.where( "radio_show_id = :radio_show_id AND song_id = :song_id", {radio_show_id: radio_show.id, song_id: self.id} ).size
+    #   end
       
-      list[dee_jay.id.to_s] = dee_jay_plays
-      self.plays_by_dj = list.to_json
-      self.save
-    else
-      dee_jay_plays = list[dee_jay.id.to_s]
-    end
+    #   list[dee_jay.id.to_s] = dee_jay_plays
+    #   self.plays_by_dj = list.to_json
+    #   self.save
+    # else
+    #   dee_jay_plays = list[dee_jay.id.to_s]
+    # end
   
-    return dee_jay_plays
+    # return dee_jay_plays
   end
   
   def calculate_last_played()
