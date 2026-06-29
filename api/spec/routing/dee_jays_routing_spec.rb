@@ -12,19 +12,19 @@ RSpec.describe Api::V1::DeeJaysController, type: :routing do
 
 
     it "routes to #create" do
-      expect(post: "/api/v1/dee_jays").to route_to("api/v1/dee_jays#create")
+      expect(post: "/api/v1/dee_jays").not_to be_routable
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/api/v1/dee_jays/1").to route_to("api/v1/dee_jays#update", id: "1")
+      expect(put: "/api/v1/dee_jays/1").not_to be_routable
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/api/v1/dee_jays/1").to route_to("api/v1/dee_jays#update", id: "1")
+      expect(patch: "/api/v1/dee_jays/1").not_to be_routable
     end
 
     it "routes to #destroy" do
-      expect(delete: "/api/v1/dee_jays/1").to route_to("api/v1/dee_jays#destroy", id: "1")
+      expect(delete: "/api/v1/dee_jays/1").not_to be_routable
     end
   end
 end
