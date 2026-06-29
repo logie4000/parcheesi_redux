@@ -24,7 +24,7 @@ RSpec.describe Artist, type: :model do
   
   describe 'Functions' do
     before do
-      @max_plays = 30
+      @max_plays = 6
       @dee_jay = DeeJay.create!( {name: Faker::Lorem.words(number: 2).join(" "), email: Faker::Lorem.words(number: 2).join(".") + "@gmail.com", password: "password"} )
       @dee_jay2 = DeeJay.create!( {name: Faker::Lorem.words(number: 2).join(" "), email: Faker::Lorem.words(number: 2).join(".") + "@gmail.com", password: "password"} )
             
