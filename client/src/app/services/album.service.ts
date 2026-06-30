@@ -11,6 +11,6 @@ export class AlbumService extends ModelService<Album> {
   override api: string = config.HOST_ALBUM_SERVICE;
 
   override itemUrl(album: Album): string {
-    return `/${config.HOST_ALBUM_SERVICE}/${album.id}`
+    return `${config.HOST_ALBUM_SERVICE}/${album.id}`
   }
 }

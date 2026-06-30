@@ -12,6 +12,6 @@ export class DeeJayService extends ModelService<DeeJay> {
   override api: string = config.HOST_DEEJAY_SERVICE;
 
   override itemUrl(dee_jay: DeeJay): string {
-    return `/${config.HOST_DEEJAY_SERVICE}/${dee_jay.id}`
+    return `${config.HOST_DEEJAY_SERVICE}/${dee_jay.id}`
   }
 }

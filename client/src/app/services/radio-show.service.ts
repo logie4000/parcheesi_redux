@@ -12,6 +12,6 @@ export class RadioShowService extends ModelService<RadioShow> {
   override api: string = config.HOST_RADIO_SHOW_SERVICE;
 
   override itemUrl(radio_show: RadioShow): string {
-    return `/${config.HOST_RADIO_SHOW_SERVICE}/${radio_show.id}`
+    return `${config.HOST_RADIO_SHOW_SERVICE}/${radio_show.id}`
   }
 }

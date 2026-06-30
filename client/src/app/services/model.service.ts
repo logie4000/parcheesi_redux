@@ -15,7 +15,7 @@ export abstract class ModelService<Model> {
     }
 
     fetchData(id: number): Observable<Model> {
-        const url = `/${this.endpointUrl}/${id}`
+        const url = `${this.endpointUrl}/${id}`
 
         var payload =  this.http.get<Model>(url);
 

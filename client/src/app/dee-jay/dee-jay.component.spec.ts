@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeeJayComponent } from './dee-jay.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { routes } from '../app.routes';
 
 describe('DeeJayComponent', () => {
   let component: DeeJayComponent;
@@ -8,6 +12,11 @@ describe('DeeJayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter(routes),
+      ],
       imports: [DeeJayComponent]
     })
     .compileComponents();

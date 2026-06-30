@@ -12,6 +12,6 @@ export class ArtistService extends ModelService<Artist>{
   override api: string = config.HOST_ARTIST_SERVICE;
 
   override itemUrl(artist: Artist): string {
-    return `/${config.HOST_ARTIST_SERVICE}/${artist.id}`
+    return `${config.HOST_ARTIST_SERVICE}/${artist.id}`
   }
 }

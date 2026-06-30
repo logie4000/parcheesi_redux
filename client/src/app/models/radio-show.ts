@@ -5,7 +5,7 @@ import { Track } from "./track";
 export interface RadioShow {
   id: number,
   dee_jay: DeeJay | undefined,
-  publish_date: Date,
+  publish_date: string,
   title: string,
   web_link: string,
   tracks: Track[] | undefined,

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RadioShowIndexComponent } from './radio-show-index.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('RadioShowIndexComponent', () => {
   let component: RadioShowIndexComponent;
@@ -8,6 +10,10 @@ describe('RadioShowIndexComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],      
       imports: [RadioShowIndexComponent]
     })
     .compileComponents();
