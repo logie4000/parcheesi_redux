@@ -1,6 +1,6 @@
 class CreateSongs < ActiveRecord::Migration[8.1]
   def change
-    create_table :songs do |t|
+    create_table :songs, if_not_exists: true do |t|
       t.string :title
       t.string :comment
       t.references :album, foreign_key: true
