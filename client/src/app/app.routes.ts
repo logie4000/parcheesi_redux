@@ -43,7 +43,7 @@ export const routes: Routes = [
         path: 'radioshows/:id',
         component: RadioShowComponent
     }, 
-        {
+    {
         path: 'songs',
         component: SongIndexComponent
     },
