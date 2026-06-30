@@ -3,12 +3,17 @@ require 'rails_helper'
 RSpec.describe 'Artists API', type: :request do
   # initialize test data
   let!(:size_artist_list) { 1 }
+  let!(:size_album_list) { 10 }
 
   let!(:user) { create(:dee_jay) }
 
   let!(:artists) { create_list(:artist, size_artist_list) }
   let(:artist_id) { artists.first.id }
-    
+
+  let!(:albums) { create_list(:album, size_album_list) }
+  let(:album_id) { albums.first.id }
+
+  let!(:songs) { create_list(:song, 10, album_id: albums.first.id, artist_id: artists.first.id) }
   let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/artists
@@ -39,6 +44,16 @@ RSpec.describe 'Artists API', type: :request do
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
+      end
+
+      it 'includes an albums array' do
+        expect(json['albums']).not_to be_empty
+        expect(json['albums'].size).to eq(1) # All the songs are on the same album
+      end
+
+      it 'includes a songs array' do
+        expect(json['songs']).not_to be_empty
+        expect(json['songs'].size).to eq(10)
       end
     end
 

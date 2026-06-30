@@ -10,7 +10,7 @@ class Api::V1::AlbumsController < ApplicationController
 
   # GET /albums/1
   def show
-    json_response(@album)
+    render json: @album, include: [{:songs => { include: :artist }}, :artists]
   end
 
   def create
@@ -28,7 +28,7 @@ class Api::V1::AlbumsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
-      @album = Album.find(params.expect(:id))
+      @album = Album.includes({:songs => [:artist]}, :artists).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
