@@ -1,6 +1,6 @@
 import { httpResource } from '@angular/common/http';
 import { Component, computed } from '@angular/core';
-import { ModelService } from '../models/model.service';
+import { ModelService } from '../services/model.service';
 
 @Component({
   selector: 'app-model-index',
