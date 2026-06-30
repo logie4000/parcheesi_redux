@@ -92,3 +92,70 @@ a:hover {
     color: white;
     text-decoration: none;
 }
+
+div.menu-item {
+    margin: 0;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+}
+
+div.menu-item:hover {
+    background-color: #ccc;
+}
+
+.menu-top-level {
+    padding-left: 1px;
+    background-color: gray;
+    color: white;
+}
+
+div.menu-second-level {
+    padding-left: 16px;
+    background-color: darkgray;
+    color: white;
+}
+
+div.menu-third-level {
+    padding-left: 31px;
+    background-color: lightgray;
+    color: #4d4d4d;
+}
+
+.menu-second-level, .menu-third-level, .open {
+    color: #000;
+    background: #c0c0c0;
+}
+
+a:active {
+    color: #000;
+    background: whitesmoke;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9
+}
+
+table tr:hover {
+    background-color: #ddd
+}
+
+table th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 15px;
+    background-color: #646464;
+    color: black;
+}
+
+table td {
+    padding-left: 15px;
+    padding-right: 5px;
+}

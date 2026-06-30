@@ -1,0 +1,18 @@
+ <table>
+   <thead>
+     <tr>
+       <th>Name</th>
+       <th>Comment</th>
+       <th>&nbsp;</th>
+     </tr>
+   </thead>
+
+   <tbody>
+     @for (artist of getItems(); track artist) {
+       <tr (click)="onRowClick(artist)">
+         <td>{{ artist.name }}</td>
+         <td>{{ artist.comment }}</td>
+       </tr>
+      }
+   </tbody>
+ </table>

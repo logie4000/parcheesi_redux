@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModelService } from '../models/model.service';
+import { ModelService } from '../services/model.service';
 
 @Component({
   selector: 'app-model-list',
