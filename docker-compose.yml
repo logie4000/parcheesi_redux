@@ -1,0 +1,25 @@
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.development
+    image: "parcheesi_redux.api:latest"
+    ports:
+      - "8383:80"
+    networks:
+      - shared_network
+    env_file:
+      - path: "./config/.parcheesi_redux.env"
+        required: true
+    environment:
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
+volumes:
+  teapothill_volume:
+    external: true
+
+networks:
+  shared_network:
+    external: true
+    name: teapothill

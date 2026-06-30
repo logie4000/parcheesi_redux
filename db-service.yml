@@ -1,0 +1,29 @@
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile.mysql
+    image: "teapothill.mysql:latest"
+    container_name: teapothill-db
+    volumes:
+      - "teapothill_volume:/data"
+      - "/var/www:/var/www"
+    networks: 
+      - teapothill
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: "/var/www/.mysql_root"
+    healthcheck:
+      test: mysqladmin ping -h ${DB_HOST} -u ${DB_USER} --password=${DB_PASSWORD}
+      interval: 10s
+      timeout: 20s
+      retries: 10
+      start_period: 2m
+      start_interval: 5s
+
+volumes:
+  teapothill_volume:
+    external: true
+
+networks:
+  teapothill:
+    external: true
