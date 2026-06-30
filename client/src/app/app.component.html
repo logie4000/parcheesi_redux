@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+  <!-- /// BEGIN TOP NAVIGATION -->
+  <div id="masthead">
+    <div id="app-title">
+      <h1>{{ title }}</h1>
+    </div>
+
+  </div>
+  <!-- /// END TOP NAVIGATION -->
+  
+  <div id="content">
+    <!-- /// BEGIN MAIN CONTENT -->
+    <div id="content-main">
+          <router-outlet />
+    </div>
+    <!-- /// END MAIN CONTENT -->
+
+    <!-- /// BEGIN SIDE NAVIGATION -->
+    <div id="nav-bar-left">
+    <!--    <app-menu /> -->
+    </div>
+    <!-- /// END SIDE NAVIGATION -->
+  </div>
+
+</body>
+</html>
