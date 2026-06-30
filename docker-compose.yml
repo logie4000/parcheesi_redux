@@ -1,29 +1,25 @@
-include:
-  - db-service.yml
 
 services:
   api:
     build:
       context: ./api
-      dockerfile: Dockerfile.production
+      dockerfile: Dockerfile.development
     image: "parcheesi_redux.api:latest"
     ports:
-      - "8283:80"
+      - "8383:80"
     networks:
-      - teapothill
+      - shared_network
     env_file:
       - path: "./config/.parcheesi_redux.env"
         required: true
     environment:
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-    depends_on:
-     db:
-       condition: service_healthy
 
 volumes:
   teapothill_volume:
     external: true
 
 networks:
-  teapothill:
+  shared_network:
     external: true
+    name: teapothill

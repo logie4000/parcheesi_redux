@@ -13,13 +13,18 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: rails
-  password: <%= begin IO.read("/var/www/.mysql") rescue "" end %>
+  database: <%= ENV["DB_NAME"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
   socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
-  database: parcheesi_redux_development
+  database: parcheesi_redux_dev
+  username: rails
+  password: <%= begin IO.read("/var/www/.mysql") rescue "#{ENV["DB_PASSWORD"]}" end %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,7 +32,7 @@ development:
 test:
   <<: *default
   adapter: sqlite3
-  database: db/test.sqlite3
+  database: storage/test.sqlite3
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -58,18 +63,15 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: parcheesi_redux_production
-    username: parcheesi_redux
-    password: <%= ENV["PARCHEESI_REDUX_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: parcheesi_redux_production_cache
+    database: <%= "#{ENV["DB_NAME"]}_cache" %>
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: parcheesi_redux_production_queue
+    database: <%= "#{ENV["DB_NAME"]}_queue" %>
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: parcheesi_redux_production_cable
+    database: <%= "#{ENV["DB_NAME"]}_cable" %>
     migrations_paths: db/cable_migrate

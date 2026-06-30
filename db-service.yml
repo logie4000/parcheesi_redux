@@ -10,7 +10,6 @@ services:
       - "/var/www:/var/www"
     networks: 
       - teapothill
-    container_name: teapothill-db
     environment:
       MYSQL_ROOT_PASSWORD_FILE: "/var/www/.mysql_root"
     healthcheck:
