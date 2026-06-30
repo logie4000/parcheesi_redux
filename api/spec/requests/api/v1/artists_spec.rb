@@ -54,8 +54,7 @@ RSpec.describe 'Artists API', type: :request do
       it 'includes a songs array' do
         expect(json['songs']).not_to be_empty
         expect(json['songs'].size).to eq(10)
-        expect(json['songs'][0]['album']).not_to be_nil
-        expect(json['songs'][0]['album']['id']).to eq(album_id)
+        expect(json['songs'][0]['album_id']['id']).to eq(album_id)
       end
     end
 
