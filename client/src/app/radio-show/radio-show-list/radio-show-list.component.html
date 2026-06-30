@@ -1,0 +1,18 @@
+ <table>
+   <thead>
+     <tr>
+       <th>Title</th>
+       <th>Publish Date</th>
+       <th>&nbsp;</th>
+     </tr>
+   </thead>
+
+   <tbody>
+     @for (radio_show of itemList(); track radio_show) {
+       <tr (click)="onRowClick(radio_show)">
+         <td>{{ radio_show.title }}</td>
+         <td>{{ radio_show.publish_date }}</td>
+       </tr>
+      }
+   </tbody>
+ </table>

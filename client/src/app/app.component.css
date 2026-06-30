@@ -1,0 +1,161 @@
+html {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#masthead {
+    height: 75px;
+    width: 100%;
+    color: #ffffff;
+    background: #000000;
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    min-width: 800px;
+
+}
+
+h1#masthead {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px;
+
+}
+
+#content {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 210px auto 30px;
+    background: #fff;
+
+}
+
+#content-main {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    padding: 5px;
+}
+
+#nav-bar-left {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    color: #000;
+    background: #fff;
+}
+
+a:hover {
+    background-color: #ccc;
+}
+
+#top-pane {
+    width: 100%;
+}
+
+#left-pane {
+    width: 50%;
+    clear: left;
+    float: left;
+}
+
+#right-pane {
+    width: 50%;
+    float: right;
+}
+
+/* ------- masthead styles ------- */
+
+#app-title {
+    float: left;
+    padding-left: 15px;
+}
+
+#greeting {
+    padding-top: 50px;
+    padding-right: 75px;
+    height: 75px;
+    float: right;
+}
+
+.item_image {
+    min-width: 300px;
+    min-height: 200px;
+    padding: 0px;
+    margin: 2px;
+    border: 2px solid black;
+}
+
+.menu-item {
+    color: white;
+    font-size: 1.3em;
+}
+
+.menu-item a {
+    color: white;
+    text-decoration: none;
+}
+
+div.menu-item {
+    margin: 0;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+}
+
+div.menu-item:hover {
+    background-color: #ccc;
+}
+
+.menu-top-level {
+    padding-left: 1px;
+    background-color: gray;
+    color: white;
+}
+
+div.menu-second-level {
+    padding-left: 16px;
+    background-color: darkgray;
+    color: white;
+}
+
+div.menu-third-level {
+    padding-left: 31px;
+    background-color: lightgray;
+    color: #4d4d4d;
+}
+
+.menu-second-level, .menu-third-level, .open {
+    color: #000;
+    background: #c0c0c0;
+}
+
+a:active {
+    color: #000;
+    background: whitesmoke;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9
+}
+
+table tr:hover {
+    background-color: #ddd
+}
+
+table th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 15px;
+    background-color: #646464;
+    color: black;
+}
+
+table td {
+    padding-left: 15px;
+    padding-right: 5px;
+}

@@ -14,7 +14,16 @@ services:
         required: true
     environment:
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    image: "parcheesi_redux.client:latest"
+    ports:
+      - "8380:80"
+    networks: 
+      - shared_network
+      
 volumes:
   teapothill_volume:
     external: true

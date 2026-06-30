@@ -1,0 +1,18 @@
+ <table>
+   <thead>
+     <tr>
+       <th>Title</th>
+       <th>Comment</th>
+       <th>&nbsp;</th>
+     </tr>
+   </thead>
+
+   <tbody>
+     @for (album of itemList(); track album) {
+       <tr (click)="onRowClick(album)">
+         <td>{{ album.title }}</td>
+         <td>{{ album.comment }}</td>
+       </tr>
+      }
+   </tbody>
+ </table>

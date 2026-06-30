@@ -1,0 +1,18 @@
+ <table>
+   <thead>
+     <tr>
+       <th>Name</th>
+       <th>Email</th>
+       <th>&nbsp;</th>
+     </tr>
+   </thead>
+
+   <tbody>
+     @for (deejay of itemList(); track deejay) {
+       <tr (click)="onRowClick(deejay)">
+         <td>{{ deejay.name }}</td>
+         <td>{{ deejay.email }}</td>
+       </tr>
+      }
+   </tbody>
+ </table>
