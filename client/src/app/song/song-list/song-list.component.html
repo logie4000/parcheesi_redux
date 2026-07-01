@@ -11,8 +11,8 @@
      @for (song of getItems(); track song) {
        <tr (click)="onRowClick(song)">
          <td>{{ song.title }}</td>
-         <td>ARTIST</td>
-         <td>ALBUM</td>
+         <td>{{ song.artist?.name }}</td>
+         <td>{{ song.album?.title }}</td>
        </tr>
       }
    </tbody>

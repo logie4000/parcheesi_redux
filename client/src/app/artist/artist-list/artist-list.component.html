@@ -2,16 +2,17 @@
    <thead>
      <tr>
        <th>Name</th>
-       <th>Comment</th>
-       <th>&nbsp;</th>
+       <th>Albums</th>
+       <th>Songs</th>
      </tr>
    </thead>
 
    <tbody>
-     @for (artist of getItems(); track artist) {
+     @for (artist of itemList(); track artist) {
        <tr (click)="onRowClick(artist)">
          <td>{{ artist.name }}</td>
-         <td>{{ artist.comment }}</td>
+         <td>{{ artist.albums?.length }}</td>
+         <td>{{ artist.songs?.length }}</td>
        </tr>
       }
    </tbody>

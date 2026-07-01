@@ -14,4 +14,16 @@ export class AlbumListComponent extends ModelListComponent<Album> {
   constructor(protected override itemService: AlbumService, protected override router: Router) {
     super(itemService, router);
   }
+
+  albumArtist(album: Album) {
+    if (album.artists) {
+      if (album.artists.length > 0) {
+        return "Various Artists";
+      } else {
+        return album.artists[0]?.name;
+      }
+    }
+
+    return "NO ARTIST";
+  }
 }
