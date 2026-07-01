@@ -3,7 +3,7 @@ class Api::V1::ArtistsController < ApplicationController
 
   # GET /artists
   def index
-    @artists = Artist.all
+    @artists = Artist.all.sort_by{|artist| [artist.significant_name]}
 
     json_response(@artists)
   end

@@ -3,14 +3,14 @@ class Api::V1::AlbumsController < ApplicationController
 
   # GET /albums
   def index
-    @albums = Album.all
+    @albums = Album.all.order(:title)
 
     json_response(@albums)
   end
 
   # GET /albums/1
   def show
-    json_respons(@album, includes: [{:songs => { include: :artist }}, :artists])
+    json_response(@album, includes: [{:songs => { include: :artist }}, :artists])
   end
 
   def create

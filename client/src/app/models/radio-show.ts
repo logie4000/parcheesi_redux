@@ -9,5 +9,4 @@ export interface RadioShow {
   title: string,
   web_link: string,
   tracks: Track[] | undefined,
-  songs: Song[] | undefined,
 }

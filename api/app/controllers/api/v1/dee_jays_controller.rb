@@ -3,7 +3,7 @@ class Api::V1::DeeJaysController < ApplicationController
 
   # GET /dee_jays
   def index
-    @dee_jays = DeeJay.all
+    @dee_jays = DeeJay.all.order(:name)
 
     json_response(@dee_jays)
   end

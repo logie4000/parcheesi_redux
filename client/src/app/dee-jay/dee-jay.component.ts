@@ -3,6 +3,7 @@ import { ModelComponent } from '../shared/model.component';
 import { DeeJay } from '../models/dee-jay';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeeJayService } from '../services/dee-jay.service';
+import { Song } from '../models/song';
 
 @Component({
   selector: 'app-dee-jay',
@@ -26,6 +27,26 @@ export class DeeJayComponent extends ModelComponent<DeeJay>{
     }
   }
 
+  radio_shows() {
+    var dee_jay = this.model();
+
+    if (dee_jay && dee_jay.radio_shows) {
+      return dee_jay.radio_shows
+    } else {
+      return [];
+    }
+  }
+    
+  songs(): Song[] {
+    var dee_jay = this.model();
+
+    if (dee_jay && dee_jay.songs) {
+      return dee_jay.songs;
+    } else {
+      return [];
+    }
+  }
+    
   comment() {
     var dee_jay = this.model();
 

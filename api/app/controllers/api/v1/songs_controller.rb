@@ -5,9 +5,9 @@ class Api::V1::SongsController < ApplicationController
   def index
     if (params[:radio_show_id])
       @radio_show = RadioShow.find(params[:radio_show_id])
-      @songs = @radio_show.songs
+      @songs = @radio_show.songs.order(:title)
     else
-      @songs = Song.all
+      @songs = Song.all.order(:title)
     end
 
     json_response(@songs)
@@ -15,7 +15,7 @@ class Api::V1::SongsController < ApplicationController
 
   #GET /api/v1/songs/:id
   def show
-    json_response(@song)
+    json_response(@song, includes: [:artist, :album, :radio_shows])
   end
 
   # POST /songs
@@ -51,7 +51,7 @@ class Api::V1::SongsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
-      @song = Song.find(params.expect(:id))
+      @song = Song.includes([:artist, :album, :radio_shows]).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

@@ -15,7 +15,8 @@ RSpec.describe 'Tracks API', type: :request do
 
   let!(:tracks) { create_list(:track, SIZE_TRACK_LIST, song_id: song_1.id, radio_show_id: radio_show.id) }
 
-  let(:track_id) { tracks.first.id }
+  let(:track) { tracks.first }
+  let(:track_id) { track.id }
     
   let(:headers) { valid_headers }
 
@@ -48,6 +49,14 @@ RSpec.describe 'Tracks API', type: :request do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
+       
+      it 'includes a song with artist and album' do
+        expect(json['song']).not_to be_empty
+        expect(json['song']['id']).to eq(track.song.id)
+        expect(json['song']['album']['title']).to eq(track.song.album.title)
+        expect(json['song']['artist']['name']).to eq(track.song.artist.name)
+  
+      end
     end
 
     context 'when the record does not exist' do
@@ -56,10 +65,6 @@ RSpec.describe 'Tracks API', type: :request do
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
-
-#      it 'returns a not found message' do
-#        expect(response).to match(/Couldn't find/)
-#      end
     end
   end
 end

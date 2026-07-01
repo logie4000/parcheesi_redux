@@ -3,10 +3,11 @@ import { ModelComponent } from '../shared/model.component';
 import { Song } from '../models/song';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongService } from '../services/song.service';
+import { RadioShowListComponent } from "../radio-show/radio-show-list/radio-show-list.component";
 
 @Component({
   selector: 'app-song',
-  imports: [],
+  imports: [RadioShowListComponent],
   templateUrl: './song.component.html',
   styleUrls: ['../app.component.css', './song.component.css']
 })
@@ -30,9 +31,9 @@ export class SongComponent extends ModelComponent<Song>{
     var song = this.model();
 
     if (song) {
-      return "ARTIST NAME";
+      return song.artist?.name;
     } else {
-      return '';
+      return 'NO ARTIST';
     }
   }
 
@@ -40,9 +41,19 @@ export class SongComponent extends ModelComponent<Song>{
     var song = this.model();
 
     if (song) {
-      return "ALBUM TITLE";
+      return song.album?.title;
     } else {
-      return '';
+      return 'NO ALBUM';
+    }
+  }
+
+  radio_shows() {
+    var song = this.model();
+
+    if (song && song.radio_shows) {
+      return song.radio_shows
+    } else {
+      return [];
     }
   }
 }
