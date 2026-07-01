@@ -30,7 +30,7 @@ class Api::V1::SongsController < ApplicationController
 
     @song = Song.post_song(params, @current_user.id)
     Rails.logger.debug("Returning json response at #{Time.now.utc}")
-    json_response(@song, :created)
+    json_response(@song, status: :created)
     Rails.logger.debug("Ended create call at #{Time.now.utc}")
   end
 

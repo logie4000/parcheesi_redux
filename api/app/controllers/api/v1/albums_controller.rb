@@ -10,7 +10,7 @@ class Api::V1::AlbumsController < ApplicationController
 
   # GET /albums/1
   def show
-    render json: @album, include: [{:songs => { include: :artist }}, :artists]
+    json_respons(@album, includes: [{:songs => { include: :artist }}, :artists])
   end
 
   def create

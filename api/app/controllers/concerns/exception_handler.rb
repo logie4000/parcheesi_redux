@@ -16,8 +16,8 @@ module ExceptionHandler
 
     rescue_from ActiveRecord::RecordNotFound do |e|
       respond_to do |format|
-        format.html { html_response({ message: e.message }, :not_found) }
-        format.json { json_response({ message: e.message }, :not_found) }
+        format.html { html_response({ message: e.message }, status: :not_found) }
+        format.json { json_response({ message: e.message }, status: :not_found) }
       end
     end
   end
@@ -28,7 +28,7 @@ module ExceptionHandler
       format.html {
         flash[:notice] = "Your request cannot be processed"
       } 
-      format.json { json_response({ message: e.message }, :unprocessable_entity) }
+      format.json { json_response({ message: e.message }, status: :unprocessable_entity) }
     end
   end
 
@@ -38,7 +38,7 @@ module ExceptionHandler
         flash[:notice] = "Unauthorized request. Please log in"
         redirect_to login_path #, status: :unauthorized 
       }
-      format.json { json_response({ message: e.message }, :unauthorized) }
+      format.json { json_response({ message: e.message }, status: :unauthorized) }
     end
   end
 end

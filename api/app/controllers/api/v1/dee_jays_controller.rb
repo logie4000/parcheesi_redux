@@ -10,7 +10,7 @@ class Api::V1::DeeJaysController < ApplicationController
 
   # GET /dee_jays/1
   def show
-    json_response(@dee_jay)
+    json_response(@dee_jay, includes: [:radio_shows, :songs])
   end
 
   def create
@@ -28,7 +28,7 @@ class Api::V1::DeeJaysController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dee_jay
-      @dee_jay = DeeJay.find(params.expect(:id))
+      @dee_jay = DeeJay.includes(:radio_shows, :songs).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
