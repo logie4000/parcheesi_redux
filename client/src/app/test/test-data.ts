@@ -12,7 +12,6 @@ export const SONG_1: Song = {
   album: undefined,
   artist: undefined,
   last_played_overall: undefined,
-  tracks: undefined,
   radio_shows: undefined
 }
 
@@ -23,7 +22,6 @@ export const RADIO_SHOW_1: RadioShow = {
   title: "Knucky Sandy Radio Hour",
   web_link: "http://radio.shows.org",
   tracks: undefined,
-  songs: undefined
 }
 
 export const DEE_JAY_1: DeeJay = {
