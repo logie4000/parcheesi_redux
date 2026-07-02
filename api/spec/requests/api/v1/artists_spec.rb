@@ -11,7 +11,8 @@ RSpec.describe 'Artists API', type: :request do
   let(:artist_id) { artists.first.id }
 
   let!(:albums) { create_list(:album, size_album_list) }
-  let(:album_id) { albums.first.id }
+  let(:album) { albums.first }
+  let(:album_id) { album.id }
 
   let!(:songs) { create_list(:song, 10, album_id: albums.first.id, artist_id: artists.first.id) }
   let(:headers) { valid_headers }
@@ -63,10 +64,10 @@ RSpec.describe 'Artists API', type: :request do
         expect(json['albums'].size).to eq(1) # All the songs are on the same album
       end
 
-      it 'includes a songs array' do
+      it 'includes a songs array with album info' do
         expect(json['songs']).not_to be_empty
         expect(json['songs'].size).to eq(10)
-        expect(json['songs'][0]['album_id']).to eq(album_id)
+        expect(json['songs'][0]['album']['title']).to eq(album.title)
       end
     end
 
