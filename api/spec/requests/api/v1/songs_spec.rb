@@ -69,6 +69,7 @@ RSpec.describe 'Songs API', type: :request do
       it 'includes a radio shows array' do
         expect(json['radio_shows']).not_to be_empty
         expect(json['radio_shows'].size).to eq(1)
+        expect(json['radio_shows'][0]['id']).to eq(radio_show.id)
       end
     end
 
