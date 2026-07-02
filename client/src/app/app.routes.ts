@@ -9,6 +9,7 @@ import { RadioShowIndexComponent } from './radio-show/radio-show-index.component
 import { RadioShowComponent } from './radio-show/radio-show.component';
 import { SongIndexComponent } from './song/song-index.component';
 import { SongComponent } from './song/song.component';
+import { Top30Component } from './artist/top-30.component';
 
 export const routes: Routes = [
     {
@@ -50,5 +51,9 @@ export const routes: Routes = [
     {
         path: 'songs/:id',
         component: SongComponent
+    },
+    {
+        path: 'top30',
+        component: Top30Component
     }, 
 ];

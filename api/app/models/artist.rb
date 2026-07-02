@@ -1,7 +1,8 @@
 class Artist < ApplicationRecord
   has_many :songs, after_add: :clear_plays
   has_many :albums, -> { distinct }, through: :songs
-  
+  has_many :tracks, through: :songs
+
   validates_presence_of :name
   
   scope :find_by_ci, lambda { |attribute, value| where("lower(#{attribute}) = ?", value.downcase) }
@@ -11,16 +12,16 @@ class Artist < ApplicationRecord
   end
   
   def plays(dee_jay = nil)
-    tot_plays = 0
-    self.songs.each do |s|
-      tot_plays += s.plays(dee_jay)
+    if (dee_jay)
+      dj_tracks = tracks.select { |track| track.dee_jay == dee_jay }
+      return dj_tracks.size
+    else
+      return tracks.size
     end
-    
-    return tot_plays
   end
   
   def self.top(count = 30, options = {})
-    Song.fix_artist_ids
+#    Song.fix_artist_ids
     
     if (options[:dee_jay_id])
       dee_jay = DeeJay.find(options[:dee_jay_id])

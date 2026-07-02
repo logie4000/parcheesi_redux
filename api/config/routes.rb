@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tracks
   namespace :api do
     namespace :v1 do
       resources :songs, :only => [:index, :show, :create, :update ]
@@ -8,6 +7,8 @@ Rails.application.routes.draw do
       resources :albums, :only => [:index, :show ] #, :create, :update ]
       resources :artists, :only => [:index, :show ] #, :create, :update ]
       resources :tracks, :only => [:index, :show ] #, :create, :update ]
+
+      get 'top_30', to: 'artists#top_30'
     end
   end
 

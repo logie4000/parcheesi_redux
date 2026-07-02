@@ -47,8 +47,20 @@ RSpec.describe Artist, type: :model do
       it 'should return the number of plays for a given artist' do
         first_artist = Artist.all.first
         last_artist = Artist.all.last
+
         expect(first_artist.plays).to eq(@max_plays)
         expect(last_artist.plays).to eq(1)
+      end
+
+      it 'should return the correct number of plays per DJ' do
+        first_artist = Artist.all.first
+        last_artist = Artist.all.last
+
+        expect(first_artist.plays(@dee_jay)).to eq(@max_plays)
+        expect(last_artist.plays(@dee_jay)).to eq(1)
+
+        expect(first_artist.plays(@dee_jay2)).to eq(0)
+        expect(last_artist.plays(@dee_jay2)).to eq(0)
       end
     end
     

@@ -125,56 +125,19 @@ class Song < ApplicationRecord
   def plays(dee_jay = nil)
     calculate_last_played if (self.total_plays.nil?)
     
-    return self.total_plays # unless (dee_jay)
-    
-    # list = Hash.new
-    # dee_jay_plays = 0
-    
-    # if (self.plays_by_dj)
-    #   list = JSON.parse(self.plays_by_dj).with_indifferent_access
-    # end
-    
-    # if (list[dee_jay.id.to_s].nil?)
-    #   dee_jay.radio_shows.each do |radio_show|
-    #     dee_jay_plays += Track.all.where( "radio_show_id = :radio_show_id AND song_id = :song_id", {radio_show_id: radio_show.id, song_id: self.id} ).size
-    #   end
-      
-    #   list[dee_jay.id.to_s] = dee_jay_plays
-    #   self.plays_by_dj = list.to_json
-    #   self.save
-    # else
-    #   dee_jay_plays = list[dee_jay.id.to_s]
-    # end
-  
-    # return dee_jay_plays
+    if (dee_jay)
+      dj_tracks = self.tracks.select { |track| track.dee_jay == dee_jay }
+      return dj_tracks.size
+    else
+      return self.tracks.size
+    end
   end
   
   def calculate_last_played()
-    # DeeJay.all.each do |dee_jay|
-    #   last_play = LastPlayedByDj.find_by(song: self, dee_jay: dee_jay)
-      
-    #   if (last_play.nil?)
-    #     last_play = LastPlayedByDj.create(song_id: self.id, dee_jay_id: dee_jay.id)
-    #   end
-      
-    #   all_shows_for_dj = self.radio_shows.where(dee_jay_id: dee_jay.id).order(:publish_date)
-    #   last_show = all_shows_for_dj.last
-      
-    #   if (last_play.radio_show != last_show)
-    #     last_play.radio_show = last_show
-    #     last_play.total_plays = all_shows_for_dj.size
-    #     last_play.save!
-    #   end
-    # end
-
     self.last_played_overall = self.radio_shows.order(:publish_date).last
     self.total_plays = self.tracks.size
     self.save
   end
-  
-  # def last_played_by_dj(dee_jay)
-  #   return self.last_played_by_djs.where(dee_jay_id: dee_jay.id).first
-  # end
   
   def self.fix_artist_ids
     Song.where(artist_id: nil).each do |song|
@@ -185,17 +148,7 @@ class Song < ApplicationRecord
       end
     end
   end
-  
-  # def self.fix_last_played_by_dj
-  #   Song.all.each do |song|
-  #     song.last_played_by_dj = nil
-  #     song.plays_by_dj = nil
-  #     song.save!
-      
-  #     song.calculate_last_played
-  #   end
-  # end
-  
+
 private
   def self.required_params?(params = {})
     Rails.logger.debug "Checking required parameters for post_song: #{params.inspect}"

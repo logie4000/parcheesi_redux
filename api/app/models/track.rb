@@ -4,5 +4,7 @@ class Track < ApplicationRecord
   
   has_one :album, through: :song
   has_one :artist, through: :song
+  has_one :dee_jay, through: :radio_show
+  
   validates_presence_of :ordinal
 end
