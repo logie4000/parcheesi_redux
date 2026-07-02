@@ -17,7 +17,7 @@ export class AlbumListComponent extends ModelListComponent<Album> {
 
   albumArtist(album: Album) {
     if (album.artists) {
-      if (album.artists.length > 0) {
+      if (album.artists.length > 1) {
         return "Various Artists";
       } else {
         return album.artists[0]?.name;
