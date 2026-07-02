@@ -49,6 +49,16 @@ export class RadioShowComponent extends ModelComponent<RadioShow>{
     }
   }
 
+  weblink(): string {
+    var radio_show = this.model();
+
+    if (radio_show && radio_show.web_link) {
+      return radio_show.web_link;
+    } else {
+      return '';
+    }
+  }
+
   deeJayName(): string {
     var radio_show = this.model();
 

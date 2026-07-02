@@ -4,10 +4,12 @@ import { DeeJay } from '../models/dee-jay';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeeJayService } from '../services/dee-jay.service';
 import { Song } from '../models/song';
+import { RadioShowListComponent } from "../radio-show/radio-show-list/radio-show-list.component";
+import { SongListComponent } from "../song/song-list/song-list.component";
 
 @Component({
   selector: 'app-dee-jay',
-  imports: [],
+  imports: [RadioShowListComponent, SongListComponent],
   templateUrl: './dee-jay.component.html',
   styleUrls: ['../app.component.css', './dee-jay.component.css']
 })
@@ -47,11 +49,21 @@ export class DeeJayComponent extends ModelComponent<DeeJay>{
     }
   }
     
-  comment() {
+  email() {
     var dee_jay = this.model();
 
     if (dee_jay) {
       return dee_jay.email;
+    } else {
+      return '';
+    }
+  }
+
+  mixcloudUsername() {
+    var dee_jay = this.model();
+
+    if (dee_jay) {
+      return dee_jay.mixcloud_user;
     } else {
       return '';
     }

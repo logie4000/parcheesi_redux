@@ -5,5 +5,17 @@
 
  <p>
    <strong>Email:</strong>
-    {{ comment() }}
+    {{ email() }}
  </p>
+
+ <p>
+  <strong>Mixcloud Username:</strong>
+  {{ mixcloudUsername() }}
+ </p>
+
+ <strong>Radio Shows</strong>
+ <app-radio-show-list [itemList]="radio_shows()" />
+ 
+ <strong>Songs</strong>
+ <app-song-list [itemList]="songs()" />
+
