@@ -13,7 +13,7 @@ export const HOST_ALBUM_SERVICE = 'albums';
 export const HOST_DEEJAY_SERVICE = 'dee_jays';
 export const HOST_RADIO_SHOW_SERVICE = 'radio_shows';
 export const HOST_SONG_SERVICE = 'songs';
-export const HOST_TOP30_SERVICE = 'top30';
+export const HOST_TOP30_SERVICE = 'top_30';
 
 export const DB_ARTIST_SERVICE = `${REST_DB_PATH}/${HOST_ARTIST_SERVICE}`;
 export const DB_ALBUM_SERVICE = `${REST_DB_PATH}/${HOST_ALBUM_SERVICE}`;
