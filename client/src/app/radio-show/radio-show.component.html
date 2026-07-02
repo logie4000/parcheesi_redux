@@ -7,3 +7,20 @@
    <strong>Publish Date:</strong>
     {{ publish_date() }}
  </p>
+
+ <p>
+  <strong>URL:</strong>
+  {{ weblink() }}
+ </p>
+
+ <p>
+  <strong>Dee Jay:</strong>
+  {{ deeJayName() }}
+ </p>
+
+ @if (songs()) {
+ <p>
+  <strong>Track List:</strong>
+  <app-song-list [itemList]="songs()" />
+ </p>
+}

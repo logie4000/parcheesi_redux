@@ -3,14 +3,14 @@ class Api::V1::TracksController < ApplicationController
 
   # GET /tracks
   def index
-    @tracks = Track.all
+    @tracks = Track.includes([{:song => [:artist, :album]}]).all
 
-    json_response(@tracks)
+    json_response(@tracks, includes: [{:song => {include: [:artist, :album]}}])
   end
 
   # GET /tracks/1
   def show
-    json_response(@track)
+    json_response(@track, includes: [{:song => {include: [:artist, :album]}}])
   end
 
   def create
@@ -28,7 +28,7 @@ class Api::V1::TracksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_track
-      @track = Track.find(params.expect(:id))
+      @track = Track.includes([{:song => [:artist, :album]}]).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,17 +1,28 @@
  <table>
    <thead>
      <tr>
-       <th>Title</th>
        <th>Publish Date</th>
-       <th>&nbsp;</th>
+       <th>Title</th>
+      @if(showUrl()) {
+        <th>URL</th>
+      }
+      @if (showDeeJay()) {
+        <th>Dee Jay</th>
+      }
      </tr>
    </thead>
 
    <tbody>
      @for (radio_show of itemList(); track radio_show) {
        <tr (click)="onRowClick(radio_show)">
-         <td>{{ radio_show.title }}</td>
          <td>{{ radio_show.publish_date }}</td>
+         <td>{{ radio_show.title }}</td>
+         @if(showUrl()) {
+           <td>{{ radio_show.web_link }}</td>
+         }
+         @if (showDeeJay()) {
+           <td>{{ deeJayName(radio_show) }}</td>
+         }
        </tr>
       }
    </tbody>

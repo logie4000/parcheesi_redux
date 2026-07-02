@@ -28,13 +28,27 @@ RSpec.describe 'Songs API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
+    it 'includes the artist and album' do
+      expect(json[0]['artist']).not_to be_empty
+      expect(json[0]['artist']['name']).to eq(artist.name)
+
+      expect(json[0]['album']).not_to be_empty
+      expect(json[0]['album']['title']).to eq(album.title)
+    end
   end
 
   # Test suite for GET /api/v1/songs/:id
   describe 'GET /api/v1/songs/:id' do
-    before { get "/api/v1/songs/#{song_id}", params: {}, headers: headers }
+    before do
+      songs.each_with_index do |song, i|
+        radio_show.tracks.create!( {ordinal: i + 1, song_id: song.id} )
+      end
+    end
 
     context 'when the record exists' do
+      before { get "/api/v1/songs/#{song_id}", params: {}, headers: headers }
+
       it 'returns the song' do
         expect(json).not_to be_empty
         expect(json['id']).to eq(song_id)
@@ -43,18 +57,30 @@ RSpec.describe 'Songs API', type: :request do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
+
+      it 'includes the artist and album' do
+        expect(json['artist']).not_to be_empty
+        expect(json['artist']['name']).to eq(artist.name)
+
+        expect(json['album']).not_to be_empty
+        expect(json['album']['title']).to eq(album.title)
+      end
+
+      it 'includes a radio shows array' do
+        expect(json['radio_shows']).not_to be_empty
+        expect(json['radio_shows'].size).to eq(1)
+        expect(json['radio_shows'][0]['id']).to eq(radio_show.id)
+      end
     end
 
     context 'when the record does not exist' do
       let(:song_id) {size_song_list + 10}
- 
+
+      before { get "/api/v1/songs/#{song_id}", params: {}, headers: headers }
+
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
-
-#      it 'returns a not found message' do
-#        expect(response).to match(/Couldn't find/)
-#      end
     end
   end
 

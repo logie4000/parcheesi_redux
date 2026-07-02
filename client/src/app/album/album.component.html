@@ -7,3 +7,13 @@
    <strong>Comment:</strong>
     {{ comment() }}
  </p>
+
+ <p>
+  <strong>Artist(s)</strong>
+  <app-artist-list [itemList]="artists()" />
+ </p>
+
+<p>
+  <strong>Song List:</strong>
+  <app-song-list [itemList]="songs()" [showAlbum]="false" />
+ </p>

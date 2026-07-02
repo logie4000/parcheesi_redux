@@ -11,6 +11,17 @@ export interface Song {
   album: Album | undefined,
   artist: Artist | undefined,
   last_played_overall: RadioShow | undefined,
-  tracks: Track[] | undefined,
+//  tracks: Track[] | undefined,
   radio_shows: RadioShow[] | undefined,
+}
+
+export const EMPTY_SONG: Song = {
+  id: 0,
+  title: '',
+  comment: '',
+  total_plays: 0,
+  album: undefined,
+  artist: undefined,
+  last_played_overall: undefined,
+  radio_shows: undefined
 }

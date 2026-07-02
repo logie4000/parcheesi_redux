@@ -10,7 +10,9 @@ RSpec.describe 'Albums API', type: :request do
   let!(:artist) { create(:artist) }
   let!(:albums) { create_list(:album, size_album_list) }
   let(:album_id) { albums.first.id }
-    
+
+  let!(:songs) { create_list(:song, 10, album_id: albums.first.id, artist_id: artist.id) }
+
   let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/albums
@@ -27,6 +29,12 @@ RSpec.describe 'Albums API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
+    it 'includes an artists array' do
+      expect(json[0]['artists']).not_to be_empty
+      expect(json[0]['artists'].size).to eq(1) # All the songs are by the same artist
+      expect(json[0]['artists'][0]['id']).to eq(artist.id)
+    end
   end
 
   # Test suite for GET /api/v1/albums/:id
@@ -42,6 +50,16 @@ RSpec.describe 'Albums API', type: :request do
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
+
+      it 'includes an artists array' do
+        expect(json['artists']).not_to be_empty
+        expect(json['artists'].size).to eq(1) # All the songs are by the same artist
+      end
+
+      it 'includes a songs array' do
+        expect(json['songs']).not_to be_empty
+        expect(json['songs'].size).to eq(10)
+      end
     end
 
     context 'when the record does not exist' do
@@ -50,10 +68,6 @@ RSpec.describe 'Albums API', type: :request do
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
-
-#      it 'returns a not found message' do
-#        expect(response).to match(/Couldn't find/)
-#      end
     end
   end
 end

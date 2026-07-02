@@ -7,3 +7,13 @@
    <strong>Artist:</strong>
     {{ artist() }}
  </p>
+
+ <p>
+  <strong>Album:</strong>
+  {{ album() }}
+ </p>
+
+ <p>
+  <strong>Radio Shows:</strong>
+  <app-radio-show-list [itemList]="radio_shows()" [showDeeJay]="false" />
+ </p>

@@ -3,14 +3,14 @@ class Api::V1::RadioShowsController < ApplicationController
 
   # GET /radio_shows
   def index
-    @radio_shows = RadioShow.all
+    @radio_shows = RadioShow.includes(:dee_jay).all.order(:publish_date)
 
-    json_response(@radio_shows)
+    json_response(@radio_shows, includes: [:dee_jay])
   end
 
   # GET /radio_shows/1
   def show
-    json_response(@radio_show)
+    json_response(@radio_show, includes: [:dee_jay, {:tracks => {include: {:song => {include: [:artist, :album]}}}}])
   end
 
   def create
@@ -28,7 +28,7 @@ class Api::V1::RadioShowsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_radio_show
-      @radio_show = RadioShow.find(params.expect(:id))
+      @radio_show = RadioShow.includes(:dee_jay, {:tracks => [{:song => [:artist, :album]}]}).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

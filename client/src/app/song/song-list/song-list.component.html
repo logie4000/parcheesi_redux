@@ -2,17 +2,27 @@
    <thead>
      <tr>
        <th>Title</th>
+  @if(showArtist()) {
        <th>Artist</th>
+  }
+  @if(showAlbum()) {
        <th>Album</th>
+  }
+       <th>Total Plays</th>
      </tr>
    </thead>
 
    <tbody>
-     @for (song of getItems(); track song) {
+     @for (song of itemList(); track song) {
        <tr (click)="onRowClick(song)">
          <td>{{ song.title }}</td>
-         <td>ARTIST</td>
-         <td>ALBUM</td>
+         @if(showArtist()) {
+           <td>{{ song.artist?.name }}</td>
+         }
+         @if(showAlbum()) {
+           <td>{{ song.album?.title }}</td>
+         }
+         <td>{{ song.total_plays }}</td>
        </tr>
       }
    </tbody>

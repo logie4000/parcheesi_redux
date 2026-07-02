@@ -11,7 +11,18 @@ import { RadioShowService } from '../../services/radio-show.service';
   styleUrls: ['../../app.component.css', './radio-show-list.component.css']
 })
 export class RadioShowListComponent extends ModelListComponent<RadioShow> {
+  showUrl = input<boolean>(true);
+  showDeeJay = input<boolean>(true);
+  
   constructor(protected override itemService: RadioShowService, protected override router: Router) {
     super(itemService, router);
+  }
+
+  deeJayName(radio_show: RadioShow) {
+    if (radio_show.dee_jay) {
+      return radio_show.dee_jay.name;
+    }
+
+    return "NO DEEJAY";
   }
 }

@@ -11,7 +11,21 @@ import { AlbumService } from '../../services/album.service';
   styleUrls: ['../../app.component.css', './album-list.component.css']
 })
 export class AlbumListComponent extends ModelListComponent<Album> {
+  showArtist = input<boolean>(true);
+  
   constructor(protected override itemService: AlbumService, protected override router: Router) {
     super(itemService, router);
+  }
+
+  albumArtist(album: Album) {
+    if (album.artists) {
+      if (album.artists.length > 1) {
+        return "Various Artists";
+      } else {
+        return album.artists[0]?.name;
+      }
+    }
+
+    return "NO ARTIST";
   }
 }

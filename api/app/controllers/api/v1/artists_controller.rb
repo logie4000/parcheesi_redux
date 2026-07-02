@@ -3,14 +3,14 @@ class Api::V1::ArtistsController < ApplicationController
 
   # GET /artists
   def index
-    @artists = Artist.all
+    @artists = Artist.includes(:albums, :songs).all.sort_by{|artist| [artist.significant_name]}
 
-    json_response(@artists)
+    json_response(@artists, includes: [:albums, :songs])
   end
 
   # GET /artists/1
   def show
-    json_response(@artist)
+    json_response(@artist, includes: [:albums, {:songs => {include: :album}}])
   end
 
   def create
@@ -28,7 +28,7 @@ class Api::V1::ArtistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
-      @artist = Artist.find(params.expect(:id))
+      @artist = Artist.includes(:albums, :songs).find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

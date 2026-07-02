@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { Artist } from '../../models/artist';
 import { ArtistService } from '../../services/artist.service';
 import { Router } from '@angular/router';
+import { ModelListComponent } from '../../shared/model-list.component';
 
 @Component({
   selector: 'app-artist-list',
@@ -9,23 +10,9 @@ import { Router } from '@angular/router';
   templateUrl: './artist-list.component.html',
   styleUrls: ['../../app.component.css', './artist-list.component.css']
 })
-export class ArtistListComponent {
-  itemList = input<Artist[] | undefined>([]);
-
-  constructor(private artistService: ArtistService, private router: Router) {
-
-  }
-  
-  getItems(): Artist[] {
-    var list = this.itemList();
-    if (list == undefined) {
-      return [];
-    } else {
-      return list;
-    }
+export class ArtistListComponent extends ModelListComponent<Artist> {
+  constructor(protected override itemService: ArtistService, protected override router: Router) {
+    super(itemService, router)
   }
 
-  onRowClick(artist: Artist) {
-    this.router.navigate([this.artistService.itemUrl(artist)]);
-  }
 }

@@ -3,12 +3,18 @@ require 'rails_helper'
 RSpec.describe 'Artists API', type: :request do
   # initialize test data
   let!(:size_artist_list) { 1 }
+  let!(:size_album_list) { 10 }
 
   let!(:user) { create(:dee_jay) }
 
   let!(:artists) { create_list(:artist, size_artist_list) }
   let(:artist_id) { artists.first.id }
-    
+
+  let!(:albums) { create_list(:album, size_album_list) }
+  let(:album) { albums.first }
+  let(:album_id) { album.id }
+
+  let!(:songs) { create_list(:song, 10, album_id: albums.first.id, artist_id: artists.first.id) }
   let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/artists
@@ -25,6 +31,18 @@ RSpec.describe 'Artists API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+    
+    it 'includes an albums array' do
+      expect(json[0]['albums']).not_to be_empty
+      expect(json[0]['albums'].size).to eq(1) # All the songs are on the same album
+      expect(json[0]['albums'][0]['id']).to eq(album_id)
+    end
+
+    it 'includes a songs array' do
+      expect(json[0]['songs']).not_to be_empty
+      expect(json[0]['songs'].size).to eq(10)
+      expect(json[0]['songs'][0]['album_id']).to eq(album_id)
+    end
   end
 
   # Test suite for GET /api/v1/artists/:id
@@ -39,6 +57,17 @@ RSpec.describe 'Artists API', type: :request do
 
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
+      end
+
+      it 'includes an albums array' do
+        expect(json['albums']).not_to be_empty
+        expect(json['albums'].size).to eq(1) # All the songs are on the same album
+      end
+
+      it 'includes a songs array with album info' do
+        expect(json['songs']).not_to be_empty
+        expect(json['songs'].size).to eq(10)
+        expect(json['songs'][0]['album']['title']).to eq(album.title)
       end
     end
 
