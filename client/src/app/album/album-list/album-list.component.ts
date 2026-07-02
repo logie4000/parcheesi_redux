@@ -11,6 +11,8 @@ import { AlbumService } from '../../services/album.service';
   styleUrls: ['../../app.component.css', './album-list.component.css']
 })
 export class AlbumListComponent extends ModelListComponent<Album> {
+  showArtist = input<boolean>(true);
+  
   constructor(protected override itemService: AlbumService, protected override router: Router) {
     super(itemService, router);
   }
