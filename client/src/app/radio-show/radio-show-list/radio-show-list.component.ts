@@ -14,4 +14,12 @@ export class RadioShowListComponent extends ModelListComponent<RadioShow> {
   constructor(protected override itemService: RadioShowService, protected override router: Router) {
     super(itemService, router);
   }
+
+  deeJayName(radio_show: RadioShow) {
+    if (radio_show.dee_jay) {
+      return radio_show.dee_jay.name;
+    }
+
+    return "NO DEEJAY";
+  }
 }

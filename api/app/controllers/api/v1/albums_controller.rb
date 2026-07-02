@@ -3,9 +3,9 @@ class Api::V1::AlbumsController < ApplicationController
 
   # GET /albums
   def index
-    @albums = Album.all.order(:title)
+    @albums = Album.includes(:artists).all.order(:title)
 
-    json_response(@albums)
+    json_response(@albums, includes: [:artists])
   end
 
   # GET /albums/1

@@ -3,9 +3,9 @@ class Api::V1::RadioShowsController < ApplicationController
 
   # GET /radio_shows
   def index
-    @radio_shows = RadioShow.all.order(:publish_date)
+    @radio_shows = RadioShow.includes(:dee_jay).all.order(:publish_date)
 
-    json_response(@radio_shows)
+    json_response(@radio_shows, includes: [:dee_jay])
   end
 
   # GET /radio_shows/1

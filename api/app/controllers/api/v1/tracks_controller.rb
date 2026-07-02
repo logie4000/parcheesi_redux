@@ -3,9 +3,9 @@ class Api::V1::TracksController < ApplicationController
 
   # GET /tracks
   def index
-    @tracks = Track.all
+    @tracks = Track.includes([{:song => [:artist, :album]}]).all
 
-    json_response(@tracks)
+    json_response(@tracks, includes: [{:song => {include: [:artist, :album]}}])
   end
 
   # GET /tracks/1

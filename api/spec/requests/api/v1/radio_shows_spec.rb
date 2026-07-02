@@ -29,6 +29,10 @@ RSpec.describe 'Radio Shows API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+                
+    it 'includes a deejay' do
+      expect(json[0]['dee_jay']).not_to be_empty
+    end
   end
 
   # Test suite for GET /api/v1/radio_shows/:id

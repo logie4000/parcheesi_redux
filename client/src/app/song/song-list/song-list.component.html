@@ -4,6 +4,7 @@
        <th>Title</th>
        <th>Artist</th>
        <th>Album</th>
+       <th>Total Plays</th>
      </tr>
    </thead>
 
@@ -13,6 +14,7 @@
          <td>{{ song.title }}</td>
          <td>{{ song.artist?.name }}</td>
          <td>{{ song.album?.title }}</td>
+         <td>{{ song.total_plays }}</td>
        </tr>
       }
    </tbody>

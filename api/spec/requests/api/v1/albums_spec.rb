@@ -29,6 +29,12 @@ RSpec.describe 'Albums API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
+    it 'includes an artists array' do
+      expect(json[0]['artists']).not_to be_empty
+      expect(json[0]['artists'].size).to eq(1) # All the songs are by the same artist
+      expect(json[0]['artists'][0]['id']).to eq(artist.id)
+    end
   end
 
   # Test suite for GET /api/v1/albums/:id

@@ -28,6 +28,14 @@ RSpec.describe 'Songs API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
+    it 'includes the artist and album' do
+      expect(json[0]['artist']).not_to be_empty
+      expect(json[0]['artist']['name']).to eq(artist.name)
+
+      expect(json[0]['album']).not_to be_empty
+      expect(json[0]['album']['title']).to eq(album.title)
+    end
   end
 
   # Test suite for GET /api/v1/songs/:id

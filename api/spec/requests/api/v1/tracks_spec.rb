@@ -34,6 +34,13 @@ RSpec.describe 'Tracks API', type: :request do
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
     end
+
+    it 'includes a song with artist and album' do
+      expect(json[0]['song']).not_to be_empty
+      expect(json[0]['song']['id']).to eq(track.song.id)
+      expect(json[0]['song']['album']['title']).to eq(track.song.album.title)
+      expect(json[0]['song']['artist']['name']).to eq(track.song.artist.name)
+    end
   end
 
   # Test suite for GET /api/v1/tracks/:id
@@ -55,7 +62,6 @@ RSpec.describe 'Tracks API', type: :request do
         expect(json['song']['id']).to eq(track.song.id)
         expect(json['song']['album']['title']).to eq(track.song.album.title)
         expect(json['song']['artist']['name']).to eq(track.song.artist.name)
-  
       end
     end
 

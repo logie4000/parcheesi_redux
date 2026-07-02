@@ -7,10 +7,10 @@ class Api::V1::SongsController < ApplicationController
       @radio_show = RadioShow.find(params[:radio_show_id])
       @songs = @radio_show.songs.order(:title)
     else
-      @songs = Song.all.order(:title)
+      @songs = Song.includes([:artist, :album]).all.order(:title)
     end
 
-    json_response(@songs)
+    json_response(@songs, includes: [:artist, :album])
   end
 
   #GET /api/v1/songs/:id
