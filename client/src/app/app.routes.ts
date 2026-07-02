@@ -53,7 +53,7 @@ export const routes: Routes = [
         component: SongComponent
     },
     {
-        path: 'top30',
+        path: 'top_30',
         component: Top30Component
-    }, 
+    },
 ];

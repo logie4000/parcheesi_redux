@@ -27,7 +27,7 @@ class Artist < ApplicationRecord
       dee_jay = DeeJay.find(options[:dee_jay_id])
       artists = dee_jay.artists.to_a
     else
-      artists = Artist.includes(:songs).all.to_a
+      artists = Artist.includes(:tracks).all.to_a
     end
     
     # Use the negative of plays so that the two can be sorted desc and ascend
