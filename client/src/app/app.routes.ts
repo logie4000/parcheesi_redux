@@ -28,19 +28,19 @@ export const routes: Routes = [
         component: AlbumComponent
     },
     {
-        path: 'deejays',
+        path: 'dee_jays',
         component: DeeJayIndexComponent
     },
     {
-        path: 'deejays/:id',
+        path: 'dee_jays/:id',
         component: DeeJayComponent
     }, 
     {
-        path: 'radioshows',
+        path: 'radio_shows',
         component: RadioShowIndexComponent
     },
     {
-        path: 'radioshows/:id',
+        path: 'radio_shows/:id',
         component: RadioShowComponent
     }, 
     {
