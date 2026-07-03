@@ -32,7 +32,10 @@ class Api::V1::ArtistsController < ApplicationController
      end
     
      @artists = Artist.top(30, {:dee_jay_id => dj_id})
-     json_response(@artists)
+
+#     Rails.logger.debug("Returning Top 30 list: #{@artists.inspect}")
+
+     json_response(@artists, includes: [:tracks])
   end
 
   private
