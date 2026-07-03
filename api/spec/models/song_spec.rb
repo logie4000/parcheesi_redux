@@ -31,20 +31,19 @@ RSpec.describe Song, type: :model do
     before do
       @max_plays = 6
       @dee_jay = DeeJay.create!( {name: Faker::Lorem.words(number: 2).join(" "), email: Faker::Lorem.words(number: 2).join(".") + "@gmail.com", password: "password"} )
+      @dee_jay2 = DeeJay.create!( {name: Faker::Lorem.words(number: 2).join(" "), email: Faker::Lorem.words(number: 2).join(".") + "@gmail.com", password: "password"} )
         
       (1..@max_plays).each do |idx|
-         @dee_jay.radio_shows.create!( { title: "KnuckySandy Radio Hour", publish_date: Date.parse("2020-03-31") + idx.days })
-      end
-      
-      (1..@max_plays).each do |p|
+        @dee_jay.radio_shows.create!( { title: "KnuckySandy Radio Hour", publish_date: Date.parse("2020-03-31") + idx.days })
+        @dee_jay2.radio_shows.create!( { title: "Mock Tuna Delight", publish_date: Date.parse("2020-03-31") + idx.days })
+
         artist = Artist.create!( {name: Faker::Lorem.words(number: 2).join(" ")} )
         album = Album.create!( {title:  Faker::Lorem.words(number: 3).join(" ")} )
 
         song = artist.songs.create!( {title: Faker::Lorem.words(number: 5).join(" ")} )
         album.songs << song
 
-        (1..p).each do |idx|
-          radio_show = RadioShow.find(idx)
+        @dee_jay.radio_shows.each do |radio_show|
           radio_show.add_song(song)
         end
       end
@@ -56,6 +55,15 @@ RSpec.describe Song, type: :model do
         last_song = Song.all.last
         expect(first_song.plays).to eq(1)
         expect(last_song.plays).to eq(@max_plays)
+      end
+
+      it 'should return the number of plays for a given song per DJ' do
+        first_song = Song.all.first
+        last_song = Song.all.last
+        expect(first_song.plays(@dee_jay)).to eq(1)
+        expect(last_song.plays(@dee_jay)).to eq(@max_plays)
+        expect(first_song.plays(@dee_jay2)).to eq(0)
+        expect(last_song.plays(@dee_jay2)).to eq(0)
       end
     end
     

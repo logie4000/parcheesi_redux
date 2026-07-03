@@ -16,7 +16,8 @@ export abstract class ModelListComponent<Model> {
   }
 
   onRowClick(item: Model) {
-    this.router.navigate([this.itemService.itemUrl(item)]);
+    var url = this.itemService.itemUrl(item);
+    this.router.navigate([url]);
   }
 
   getUrl(item: Model) {

@@ -25,6 +25,19 @@ class Api::V1::ArtistsController < ApplicationController
 
   end
   
+  def top_30
+     if (params[:dee_jay])
+      @dee_jay = DeeJay.find(params[:dee_jay])
+      dj_id = @dee_jay.id if (@dee_jay)
+     end
+    
+     @artists = Artist.top(30, {:dee_jay_id => dj_id})
+
+#     Rails.logger.debug("Returning Top 30 list: #{@artists.inspect}")
+
+     json_response(@artists, includes: [:tracks])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist

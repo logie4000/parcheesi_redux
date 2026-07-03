@@ -6,6 +6,7 @@ RSpec.describe 'Artists API', type: :request do
   let!(:size_album_list) { 10 }
 
   let!(:user) { create(:dee_jay) }
+  let!(:user2) { create(:dee_jay) }
 
   let!(:artists) { create_list(:artist, size_artist_list) }
   let(:artist_id) { artists.first.id }
@@ -77,10 +78,50 @@ RSpec.describe 'Artists API', type: :request do
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
       end
+    end
+  end
 
-#      it 'returns a not found message' do
-#        expect(response).to match(/Couldn't find/)
-#      end
+  describe 'GET /api/v1/top_30' do
+    let!(:radio_shows1) { create_list(:radio_show, 30, dee_jay_id: user.id)}
+    let!(:radio_shows2) { create_list(:radio_show, 10, dee_jay_id: user2.id)}
+
+    let!(:artists) { create_list(:artist, 40) }
+    let!(:songs) { create_list(:song, 40) }
+    
+    before do
+      radio_shows1.each_with_index do |radio_show, idx|
+        (idx + 1).times do |n|
+          song = artists[n].songs.create!( {title: Faker::Lorem.words(number: 5).join(" ")} )
+          radio_show.add_song(song, {ordinal: idx + 1})
+        end
+      end
+      
+      radio_shows2.each_with_index do |radio_show, idx|
+        (idx + 1).times do |n|
+          song = artists[n].songs.create!( {title: Faker::Lorem.words(number: 5).join(" ")} )
+          radio_show.add_song(song, {ordinal: idx + 1})
+        end
+      end
+    end
+
+    it 'renders a successful response' do
+      get '/api/v1/top_30', headers: headers 
+      expect(response).to have_http_status(200)
+
+      get '/api/v1/top_30', params: {dee_jay: user2.id}, headers: headers 
+      expect(response).to have_http_status(200)
+    end
+    
+    it 'returns the artists for the given dee jay' do
+      get '/api/v1/top_30', params: {dee_jay: user.id}, headers: headers 
+
+      expect(json).not_to be_empty
+      expect(json.size).to eq(30)
+      
+      get '/api/v1/top_30', params: {dee_jay: user2.id}, headers: headers 
+
+      expect(json).not_to be_empty
+      expect(json.size).to eq(10)
     end
   end
 end

@@ -1,0 +1,11 @@
+ <strong>Top 30 Artists</strong>
+ 
+ @if(showDeeJay()) {
+  <p>
+    <strong>For DJ: </strong>
+    {{ deeJayName() }}
+  </p>
+ }
+
+ <app-artist-list [itemList]="values()" [showAlbums]="false" [showSongs]="false" />
+ 
