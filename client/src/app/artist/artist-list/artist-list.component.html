@@ -1,18 +1,36 @@
  <table>
    <thead>
      <tr>
+  @if(showName()) {
        <th>Name</th>
+  }
+  @if(showAlbums()) {
        <th>Albums</th>
+  }
+  @if(showSongs()) {
        <th>Songs</th>
+  }
+  @if(showPlays()) {
+     <th>Plays</th>
+  }
      </tr>
    </thead>
 
    <tbody>
      @for (artist of itemList(); track artist) {
        <tr (click)="onRowClick(artist)">
-         <td>{{ artist.name }}</td>
-         <td>{{ artist.albums?.length }}</td>
-         <td>{{ artist.songs?.length }}</td>
+           @if(showName()) {
+            <td>{{ artist.name }}</td>
+           }
+           @if(showAlbums()) {
+            <td>{{ artist.albums?.length }}</td>
+           }
+           @if(showSongs()) {
+            <td>{{ artist.songs?.length }}</td>
+           }
+           @if(showPlays()) {
+             <td>{{ artist.tracks?.length }}</td>
+           }
        </tr>
       }
    </tbody>

@@ -20,9 +20,7 @@ class Artist < ApplicationRecord
     end
   end
   
-  def self.top(count = 30, options = {})
-#    Song.fix_artist_ids
-    
+  def self.top(count = 30, options = {})  
     if (options[:dee_jay_id])
       dee_jay = DeeJay.find(options[:dee_jay_id])
       artists = dee_jay.artists.to_a
